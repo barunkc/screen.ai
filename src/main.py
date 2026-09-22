@@ -12,11 +12,11 @@ def process_screen():
 
     result = ask_ai(
         """Analyze the screen and return JSON with:
-- application
-- active_file
-- visible_elements
-- current_state
-Keep each value concise.""",
+        - application
+        - active_file
+        - visible_elements
+        - current_state
+        Keep each value concise.""",
         encoded_photo
     )
 
@@ -31,12 +31,14 @@ Keep each value concise.""",
     print("Current state:", screen_state["current_state"])
     print("Visible elements:", screen_state["visible_elements"])
 
-    task = "Fix the error in my Python program"
+    task = input("\nWhat do you want me to do? ")
 
     plan = create_plan(task, screen_state)
 
+    print("\nRAW PLAN:")
+    print(plan)
     print("\nGoal:", plan["goal"])
 
     print("Plan:")
-    for step in plan["steps"]:
-        print(f"{step['step']}. {step['action']}")
+    for i, step in enumerate(plan["steps"], 1):
+        print(f"{i}. {step}")

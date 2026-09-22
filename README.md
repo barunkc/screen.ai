@@ -29,7 +29,7 @@ The current pipeline:
 5. Generate a structured plan
 
 ## Tech Stack
-
+m
 - Python
 - MSS — screen capture
 - Requests — API communication

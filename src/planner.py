@@ -60,8 +60,10 @@ if __name__ == "__main__":
         "visible_elements": ["Python editor", "terminal"]
     }
 
+    task = input("\nWhat do you want me to do? ")
+
     result = create_plan(
-        "Fix the error in my Python program",
+        task,
         screen_state
     )
 
