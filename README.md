@@ -53,15 +53,16 @@ screen.ai/
 
 Early working prototype.
 
-The perception and planning pipeline is working. The project currently focuses on building the AI's ability to observe and reason about a computer screen before adding the ability to interact with it.
+The perception and planning pipeline is working, including dynamic user tasks and AI-generated plans. The next stage is adding computer interaction.
 
 ## Roadmap
 
 - [x] Screen perception
 - [x] Structured screen state
 - [x] AI task planning
-- [ ] User-provided tasks
+- [x] User-provided tasks
 - [ ] Computer interaction
+
 - [ ] Observe → Plan → Act → Observe loop
 - [ ] Memory and context
 - [ ] Better screen understanding
