@@ -1,5 +1,3 @@
-from urllib import response
-
 import requests
 import json
 
@@ -27,7 +25,28 @@ Return JSON with:
 - goal
 - steps
 
-Each step should be a short action or reasoning step.
+Each step must contain:
+- action
+- target
+
+The action must be one of:
+- move_mouse
+- click
+- type
+- press_key
+- hotkey
+- ask_user
+
+The target must contain only the value needed to execute the action.
+Do not include explanations or descriptions in the target.
+
+Examples:
+- hotkey → "ctrl+shift+`"
+- press_key → "enter"
+- type → "hello world"
+- click → "Start button"
+- move_mouse → "500,300"
+
 Do not perform any actions.
 """
             }
@@ -36,7 +55,6 @@ Do not perform any actions.
     }
 
     response = requests.post(API_URL, json=data)
-
     result = response.json()
 
     content = result["choices"][0]["message"]["content"]
@@ -45,26 +63,9 @@ Do not perform any actions.
 
     start = content.find("{")
     end = content.rfind("}") + 1
-
     content = content[start:end]
 
+    print("Parsed plan:")
+    print(content)
 
     return json.loads(content)
-
-
-if __name__ == "__main__":
-    screen_state = {
-        "application": "VS Code",
-        "active_file": "main.py",
-        "current_state": "Python script has an error",
-        "visible_elements": ["Python editor", "terminal"]
-    }
-
-    task = input("\nWhat do you want me to do? ")
-
-    result = create_plan(
-        task,
-        screen_state
-    )
-
-    print(result)

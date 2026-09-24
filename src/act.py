@@ -14,5 +14,3 @@ def press_key(key):
 
 def hotkey(*keys):
     pyautogui.hotkey(*keys)
-click()
-hotkey("ctrl", "a")

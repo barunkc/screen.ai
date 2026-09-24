@@ -1,9 +1,11 @@
 import base64
 import json
+import time
 
 from capture import capture_screen
 from ai import ask_ai
 from planner import create_plan
+from act import hotkey, move_mouse, click, type_text, press_key
 
 
 def process_screen():
@@ -42,3 +44,33 @@ def process_screen():
     print("Plan:")
     for i, step in enumerate(plan["steps"], 1):
         print(f"{i}. {step}")
+
+    for step in plan["steps"]:
+        action = step["action"]
+        target = step["target"]
+
+        print(f"\nExecuting: {action} → {target}")
+
+        if action == "hotkey":
+            keys = target.split(" to ")[0].split("+")
+            hotkey(*keys)
+
+        elif action == "move_mouse":
+            x, y = map(int, target.split(","))
+            move_mouse(x, y)
+
+        elif action == "click":
+            click()
+
+        elif action == "type":
+            type_text(target)
+
+        elif action == "press_key":
+            press_key(target)
+
+        elif action == "ask_user":
+            input(f"Please perform the following action: {target}. Press Enter when done.")
+
+        else:
+            print(f"Unknown action: {action}")
+        time.sleep(1)   
